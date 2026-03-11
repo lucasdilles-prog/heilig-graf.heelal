@@ -3,7 +3,7 @@
   <head>
     <link rel="stylesheet" href="style-eigenweb.css" />
     <link rel="icon" type="image/png" href="img/space-favicon.png" />
-    <title>gewicht op andere plaatsen</title>
+    <title>.</title>
   </head>
   <body>
     <ul id="navbar">
@@ -11,5 +11,58 @@
       <li><a href="magic.html">magic</a></li>
       <li><a href="fotos.html">fotos</a></li>
     </ul>
+    <h1>Gewicht op een andere hemellichaam</h1>
+
+    <input id="inputkilogram" type="number" placeholder="kilogram" oninput="weightConverter()">
+  
+    
+    <select id="planeet" onchange="weightConverter()">
+      <option value="zon">Zon</option>
+      <option value="mercurius">Mercurius</option>
+      <option value="venus">Venus</option>
+      <option value="aarde">Aarde</option>
+      <option value="maan">Maan</option>
+      <option value="mars">Mars</option>
+      <option value="jupiter">Jupiter</option>
+      <option value="saturnus">Saturnus</option>
+      <option value="uranus">Uranus</option>
+      <option value="neptunus">Neptunus</option>
+    </select>
+    
+    <p>Gewicht daar: <span id="outputKilograms"></span> N</p>
+    <p>Voelt aan als een massa van: <span id="outputKilograms1"></span> kg</p>
+    
+    <script>
+    function weightConverter() {
+    
+        let gewichtOpAarde = document.getElementById("inputkilogram").value;
+        let planeet = document.getElementById("planeet").value;
+    
+        const factoren = {
+            zon: 28,
+            mercurius: 0.38,
+            venus: 0.91,
+            aarde: 1.0,
+            maan: 0.166,
+            mars: 0.38,
+            jupiter: 2.34,
+            saturnus: 1.06,
+            uranus: 0.92,
+            neptunus: 1.12
+        };
+    
+        let factor = factoren[planeet];
+    
+        if (gewichtOpAarde && factor) {
+            let resultaat = (gewichtOpAarde * factor * 9.81).toFixed(2);
+            let resultaat1 = (gewichtOpAarde * factor).toFixed(2);
+            document.getElementById("outputKilograms").innerText = resultaat;
+            document.getElementById("outputKilograms1").innerText = resultaat1;
+        } else {
+            document.getElementById("outputKilograms").innerText = "";
+            document.getElementById("outputKilograms1").innerText = "";
+        } 
+    }
+    </script>
 </body>
 </html>
